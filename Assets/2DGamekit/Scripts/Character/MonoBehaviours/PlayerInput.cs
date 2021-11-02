@@ -53,15 +53,28 @@ namespace Gamekit2D
             s_Instance = null;
         }
 
+        /*
+            decided to make a bootleg Singleton called Globals since setting the 
+            protected 'inputType' property would get lost somewhere on regaining control
+        */
+        public void ToggleInputController()
+        {
+            if ((int)Globals.Instance.inputType == (int)InputType.Controller) {
+                Globals.Instance.inputType = InputType.MouseAndKeyboard;
+            } else if ((int)Globals.Instance.inputType == (int)InputType.MouseAndKeyboard) {
+                Globals.Instance.inputType = InputType.Controller;
+            }
+        }
+
         protected override void GetInputs(bool fixedUpdateHappened)
         {
-            Pause.Get(fixedUpdateHappened, inputType);
-            Interact.Get(fixedUpdateHappened, inputType);
-            MeleeAttack.Get(fixedUpdateHappened, inputType);
-            RangedAttack.Get(fixedUpdateHappened, inputType);
-            Jump.Get(fixedUpdateHappened, inputType);
-            Horizontal.Get(inputType);
-            Vertical.Get(inputType);
+            Pause.Get(fixedUpdateHappened, Globals.Instance.inputType);
+            Interact.Get(fixedUpdateHappened, Globals.Instance.inputType);
+            MeleeAttack.Get(fixedUpdateHappened, Globals.Instance.inputType);
+            RangedAttack.Get(fixedUpdateHappened, Globals.Instance.inputType);
+            Jump.Get(fixedUpdateHappened, Globals.Instance.inputType);
+            Horizontal.Get(Globals.Instance.inputType);
+            Vertical.Get(Globals.Instance.inputType);
 
             if (Input.GetKeyDown(KeyCode.F12))
             {
