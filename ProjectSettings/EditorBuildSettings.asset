@@ -45,6 +45,15 @@ EditorBuildSettings:
     path: 
     guid: 2f940f82585e18b42b0512a994a12502
   - enabled: 1
-    path: Assets/NewScene.unity
+    path: 
     guid: a341347ecfade124f817cac8ea56a209
+  - enabled: 1
+    path: 
+    guid: f8a92fe91670ac9469f63e38873136ad
+  - enabled: 1
+    path: Assets/NewScene.unity
+    guid: 7de90e33a0fde6d40a81b452857d2880
+  - enabled: 1
+    path: Assets/Scenes/demo/hero-abilities.unity
+    guid: ea7da0efa9696144d86f500766b724d5
   m_configObjects: {}

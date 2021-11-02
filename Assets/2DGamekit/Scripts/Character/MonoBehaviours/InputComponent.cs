@@ -7,12 +7,6 @@ namespace Gamekit2D
 {
     public abstract class InputComponent : MonoBehaviour
     {
-        public enum InputType
-        {
-            MouseAndKeyboard,
-            Controller,
-        }
-
 
         public enum XboxControllerButtons
         {
@@ -280,8 +274,6 @@ namespace Gamekit2D
                 }
             }
         }
-
-        public InputType inputType = InputType.MouseAndKeyboard;
 
         bool m_FixedUpdateHappened;
 
