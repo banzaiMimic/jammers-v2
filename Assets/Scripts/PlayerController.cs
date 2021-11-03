@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 
   private bool isFacingRight = true;
   private float horizontal;
-  private float speed = 13f;
+  private float speed = 5f;
   private float jumpPower = 20f;
 
   // Start is called before the first frame update
@@ -44,7 +44,17 @@ public class PlayerController : MonoBehaviour {
   }
 
   public void Move(InputAction.CallbackContext context) {
-    horizontal = context.ReadValue<Vector2>().x;
+    float moveX = context.ReadValue<Vector2>().x;
+    Debug.Log("moveX:" + moveX);
+    if (moveX > 0) {
+      horizontal = speed;
+    } else if (moveX < 0) {
+      horizontal = -speed;
+    } else {
+      horizontal = 0f;
+    }
+    //horizontal = Mathf.Abs(moveX) > Mathf.Epsilon ? speed : -speed;
+    //horizontal = context.ReadValue<Vector2>().x;
   }
 
   public void Jump(InputAction.CallbackContext context) {
