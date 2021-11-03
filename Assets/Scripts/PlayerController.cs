@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
 
-  public Rigidbody2D rb;
-  public Transform groundCheck;
-  public LayerMask groundLayer;
+  [SerializeField] private LayerMask jumpableGround;
+
+  private Rigidbody2D rBody;
+  private BoxCollider2D bCollider;
 
   private bool isFacingRight = true;
   private float horizontal;
@@ -16,12 +17,13 @@ public class PlayerController : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-    
+    rBody = GetComponent<Rigidbody2D>();
+    bCollider = GetComponent<BoxCollider2D>();
   }
 
   // Update is called once per frame
   void Update() {
-    rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    rBody.velocity = new Vector2(horizontal * speed, rBody.velocity.y);
 
     if (!isFacingRight && horizontal > 0f) {
       Flip();
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   private bool IsGrounded() {
-    return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    return Physics2D.BoxCast(bCollider.bounds.center, bCollider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
   }
 
   private void Flip() {
@@ -48,11 +50,11 @@ public class PlayerController : MonoBehaviour {
   public void Jump(InputAction.CallbackContext context) {
     Debug.Log("jump");
     if (context.performed && IsGrounded()) {
-      rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+      rBody.velocity = new Vector2(rBody.velocity.x, jumpPower);
     }
 
-    if (context.canceled && rb.velocity.y > 0f) {
-      rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+    if (context.canceled && rBody.velocity.y > 0f) {
+      rBody.velocity = new Vector2(rBody.velocity.x, rBody.velocity.y * 0.5f);
     }
   }
 }
