@@ -16,13 +16,13 @@ public class StateMachine : MonoBehaviour {
 
   void Update() {
     if (currentState != null) {
-      currentState.UpdateLogic();
+      currentState.Update();
     }
   }
 
   void LateUpdate() {
     if (currentState != null) {
-      currentState.UpdatePhysics();
+      currentState.LateUpdate();
     }
   }
 

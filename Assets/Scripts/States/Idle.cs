@@ -10,12 +10,12 @@ public class Idle : Grounded {
     base.Enter();
   }
 
-  public override void UpdateLogic() {
-    base.UpdateLogic();
+  public override void Update() {
+    base.Update();
   }
 
-  public override void UpdatePhysics() {
-    base.UpdatePhysics();
+  public override void LateUpdate() {
+    base.LateUpdate();
     Vector2 vel = movementSm.rBody.velocity;
     vel.x = 0;
     movementSm.rBody.velocity = vel;

@@ -13,7 +13,7 @@ public class BaseState {
   }
 
   public virtual void Enter() { }
-  public virtual void UpdateLogic() { }
-  public virtual void UpdatePhysics() { }
+  public virtual void Update() { }
+  public virtual void LateUpdate() { }
   public virtual void Exit() { }
 }

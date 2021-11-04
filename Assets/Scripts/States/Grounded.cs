@@ -28,8 +28,8 @@ public class Grounded : BaseState {
     };
   }
 
-  public override void UpdateLogic() {
-    base.UpdateLogic();
+  public override void Update() {
+    base.Update();
     
   }
 

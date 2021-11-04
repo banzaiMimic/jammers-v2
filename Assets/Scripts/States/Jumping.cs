@@ -22,16 +22,22 @@ public class Jumping : BaseState {
     _movementSm.rBody.velocity = vel;
   }
 
-  public override void UpdateLogic() {
-    base.UpdateLogic();
+  public override void Update() {
+    base.Update();
+    Debug.Log("_movementSm.rBody.velocity.y : " + _movementSm.rBody.velocity.y + "Mathf.Epsilon : " + Mathf.Epsilon);
+    Debug.Log("_movementSm.rBody.IsTouchingLayers(_groundLayer) : " + _movementSm.rBody.IsTouchingLayers(_groundLayer));
+    Debug.Log("---");
+    _grounded = _movementSm.rBody.velocity.y < Mathf.Epsilon && _movementSm.rBody.IsTouchingLayers(_groundLayer);
+    Debug.Log("grounded:" + _grounded + " groundLayer: " + _groundLayer);
     // if _grounded change state to idle
     if (_grounded) {
+      Debug.Log("[_grounded!] changing to idle...");
       stateMachine.ChangeState(_movementSm.idleState);
     }
   }
 
-  public override void UpdatePhysics() {
-    _grounded = _movementSm.rBody.velocity.y < Mathf.Epsilon && _movementSm.rBody.IsTouchingLayers(_groundLayer);
+  public override void LateUpdate() {
+    base.LateUpdate();
   }
 
 }

@@ -55,6 +55,7 @@ public class MovementSM : StateMachine {
       this.ChangeState(((MovementSM) this).movingState);
     };
     moveAction.canceled += ctx => {
+      Debug.Log("[moveAction.canceled] --> going to idle");
       this.ChangeState(((MovementSM) this).idleState);
     };
 
@@ -62,6 +63,7 @@ public class MovementSM : StateMachine {
     jumpAction.AddBinding("<Gamepad>/buttonSouth");
     jumpAction.AddBinding("<Keyboard>/space");
     jumpAction.performed += ctx => {
+      Debug.Log("[jumpAction.performed!] going to jumpingState...");
       this.ChangeState(((MovementSM) this).jumpingState);
     };
     //@Todo figure out how to cancel jumping state so that if user taps button it will do a small jump?
