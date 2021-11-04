@@ -12,20 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - Level
-  - Enemy
-  - Usable
-  - Interactable
-  - IgnorePlayer
-  - Player
-  - Cameras
-  - LitSprites
-  - Destructable
-  - EnemyWeapon
-  - BossWeakPoint
-  - Bullet
+  - Ground
   - 
   - 
   - 
@@ -36,8 +23,21 @@ TagManager:
   - 
   - 
   - 
-  - PlayerDrop
-  - Platform
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Background
     uniqueID: 2116099231
