@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Moving : BaseState {
-
-  private float _horizontalInput;
+public class Moving : Grounded {
 
   public Moving(MovementSM stateMachine) : base("Moving", stateMachine) {}
 
   public override void Enter() {
     base.Enter();
-    _horizontalInput = 0f;
   }
 
   public override void UpdateLogic() {
@@ -20,6 +18,28 @@ public class Moving : BaseState {
     // if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon) {
     //   stateMachine.ChangeState(((MovementSM) stateMachine).idleState);
     // }
+  }
+
+  public override void UpdatePhysics() {
+    base.UpdatePhysics();
+    //@Todo might want to move player movement logic in here
+    // rigid body could be accessed i.e. ((MovementSM) stateMachine).rigidBody
+    Vector2 vel = movementSm.rBody.velocity;
+    vel.x = movementSm.horizontalVelocity * movementSm.speed;
+    movementSm.rBody.velocity = vel;
+  }
+
+  public void MoveEntity(InputAction.CallbackContext context) {
+    Vector2 movementInput = context.ReadValue<Vector2>();
+    float moveX = movementInput.x;
+    Debug.Log("moveX:" + moveX);
+    if (moveX > 0) {
+      movementSm.horizontalVelocity = 1;
+    } else if (moveX < 0) {
+      movementSm.horizontalVelocity = -1;
+    } else {
+      movementSm.horizontalVelocity = 0f;
+    }
   }
 
 }

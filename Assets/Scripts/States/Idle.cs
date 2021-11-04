@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Idle : BaseState {
+public class Idle : Grounded {
 
   public Idle(MovementSM stateMachine) : base("Idle", stateMachine) {
     Debug.Log("ENTER!");
@@ -15,6 +15,11 @@ public class Idle : BaseState {
 
   public override void UpdateLogic() {
     base.UpdateLogic();
+  }
+
+  public override void UpdatePhysics() {
+    base.UpdatePhysics();
+    movementSm.rBody.velocity = new Vector2(0, 0);
   }
 
 }
