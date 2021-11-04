@@ -22,8 +22,6 @@ public class Moving : Grounded {
 
   public override void UpdatePhysics() {
     base.UpdatePhysics();
-    //@Todo might want to move player movement logic in here
-    // rigid body could be accessed i.e. ((MovementSM) stateMachine).rigidBody
     Vector2 vel = movementSm.rBody.velocity;
     vel.x = movementSm.horizontalVelocity * movementSm.speed;
     movementSm.rBody.velocity = vel;

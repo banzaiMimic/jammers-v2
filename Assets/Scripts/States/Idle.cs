@@ -19,7 +19,10 @@ public class Idle : Grounded {
 
   public override void UpdatePhysics() {
     base.UpdatePhysics();
-    movementSm.rBody.velocity = new Vector2(0, 0);
+    Vector2 vel = movementSm.rBody.velocity;
+    vel.x = 0;
+    movementSm.rBody.velocity = vel;
+    //movementSm.rBody.velocity.x = 0;
   }
 
 }

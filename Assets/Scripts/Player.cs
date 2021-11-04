@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
   private LayerMask jumpableGround;
 
   [HideInInspector]
-  public MovementSM movementSm { get; private set; }
+  public MovementSM movementSm;
 
   private Rigidbody2D rBody;
   private BoxCollider2D bCollider;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
   }
 
   void Update() {
-    rBody.velocity = new Vector2(horizontal * speed, rBody.velocity.y);
+    //rBody.velocity = new Vector2(horizontal * speed, rBody.velocity.y);
 
     // if (!isFacingRight && horizontal > 0f) {
     //   Flip();
@@ -66,13 +66,13 @@ public class Player : MonoBehaviour {
   }
 
   public void Jump(InputAction.CallbackContext context) {
-    Debug.Log("jump");
-    if (context.performed && IsGrounded()) {
-      rBody.velocity = new Vector2(rBody.velocity.x, jumpPower);
-    }
+    // Debug.Log("jump");
+    // if (context.performed && IsGrounded()) {
+    //   rBody.velocity = new Vector2(rBody.velocity.x, jumpPower);
+    // }
 
-    if (context.canceled && rBody.velocity.y > 0f) {
-      rBody.velocity = new Vector2(rBody.velocity.x, rBody.velocity.y * 0.5f);
-    }
+    // if (context.canceled && rBody.velocity.y > 0f) {
+    //   rBody.velocity = new Vector2(rBody.velocity.x, rBody.velocity.y * 0.5f);
+    // }
   }
 }
