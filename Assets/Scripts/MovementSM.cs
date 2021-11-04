@@ -15,10 +15,14 @@ public class MovementSM : StateMachine {
   public Vector2 movementInput { get; private set; }
   [HideInInspector]
   public float horizontalVelocity = 0f;
+  //@Todo prob want to convert an Entity class or IMoveable instead of a Player
+  [HideInInspector]
+  public Player player;
 
   public Rigidbody2D rBody;
   public float speed = 13f;
   public float jumpForce = 20f;
+  public bool isFacingRight = true;
 
   private void Awake() {
     this.AddInputBindings();
@@ -26,6 +30,7 @@ public class MovementSM : StateMachine {
     this.movingState = new Moving(this);
     this.jumpingState = new Jumping(this);
     this.rBody = GetComponent<Rigidbody2D>();
+    this.player = GetComponent<Player>();
   }
 
   //@Todo might want to init this only for our Player ? 
@@ -51,9 +56,15 @@ public class MovementSM : StateMachine {
 
     var jumpAction = map.AddAction("jump");
     jumpAction.AddBinding("<Gamepad>/buttonSouth");
+    jumpAction.AddBinding("<Keyboard>/space");
     jumpAction.performed += ctx => {
       this.ChangeState(((MovementSM) this).jumpingState);
     };
+    //@Todo figure out how to cancel jumping state so that if user taps button it will do a small jump?
+    // jumpAction.canceled += ctx => {
+    //   //@Todo prob want a 'falling' state here
+    //   this.ChangeState(((MovementSM) this).idleState);
+    // };
     
     map.Enable();
   }

@@ -25,6 +25,23 @@ public class Moving : Grounded {
     Vector2 vel = movementSm.rBody.velocity;
     vel.x = movementSm.horizontalVelocity * movementSm.speed;
     movementSm.rBody.velocity = vel;
+
+    if (!movementSm.isFacingRight && movementSm.horizontalVelocity > 0f) {
+      Flip();
+    } else if (movementSm.isFacingRight && movementSm.horizontalVelocity < 0f) {
+      Flip();
+    }
+  }
+
+  void Update() {
+    //rBody.velocity = new Vector2(horizontal * speed, rBody.velocity.y);
+  }
+
+  private void Flip() {
+    movementSm.isFacingRight = !movementSm.isFacingRight;
+    Vector3 localScale = movementSm.player.transform.localScale;
+    localScale.x *= -1f;
+    movementSm.player.transform.localScale = localScale;
   }
 
   public void MoveEntity(InputAction.CallbackContext context) {
