@@ -9,6 +9,13 @@ public class Moving : Grounded {
 
   public override void Enter() {
     base.Enter();
+    // we need reference to our player's Animator in order to set a parameter on it.
+    movementSm.animator.SetBool("running", true);
+  }
+
+  public override void Exit() {
+    base.Exit();
+    movementSm.animator.SetBool("running", false);
   }
 
   public override void Update() {
