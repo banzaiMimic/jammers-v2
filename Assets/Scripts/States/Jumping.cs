@@ -1,10 +1,7 @@
-using System.Net.Mail;
-using System.Xml.Schema;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Jumping : BaseState {
 
@@ -16,22 +13,6 @@ public class Jumping : BaseState {
 
   public Jumping(MovementSM stateMachine) : base("Jumping", stateMachine) {
     this._movementSm = (MovementSM) stateMachine;
-  }
-
-  public void Awake() {
-    this.AddListeners();
-  }
-
-  private void AddListeners() {
-    // var action = new InputAction(binding: "<Gamepad>/buttonSouth");
-    // action.Enable(); 
-    // action.performed += ctx => {
-    //   stateMachine.ChangeState(_movementSm.jumpingState);
-    //   //this.ChangeState(((MovementSM) this).movingState);
-    // };
-    // action.canceled += ctx => {
-    //   //this.ChangeState(((MovementSM) this).idleState);
-    // };
   }
 
   public override void Enter() {
@@ -51,7 +32,6 @@ public class Jumping : BaseState {
 
   public override void UpdatePhysics() {
     _grounded = _movementSm.rBody.velocity.y < Mathf.Epsilon && _movementSm.rBody.IsTouchingLayers(_groundLayer);
-    Debug.Log("grounded:" + _grounded);
   }
 
 }

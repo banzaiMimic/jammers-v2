@@ -27,10 +27,7 @@ public class StateMachine : MonoBehaviour {
   }
 
   public void ChangeState(BaseState newState) {
-    //@Todo miiight have to let this get called multiple times ? shouldn't though since the update methods of our
-    // currentState will be called already ... 
     if (currentState.name != newState.name) {
-      Debug.Log("[ChangeState] : " + currentState.name + " -> " + newState.name);
       currentState.Exit();
       currentState = newState;
       currentState.Enter();
