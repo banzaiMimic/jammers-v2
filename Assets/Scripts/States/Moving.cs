@@ -17,9 +17,9 @@ public class Moving : BaseState {
     base.UpdateLogic();
     //_horizontalInput = Input.GetAxis("Horizontal");
     // transition to idle state if input = 0
-    if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon) {
-      stateMachine.ChangeState(((MovementSM) stateMachine).idleState);
-    }
+    // if (Mathf.Abs(_horizontalInput) < Mathf.Epsilon) {
+    //   stateMachine.ChangeState(((MovementSM) stateMachine).idleState);
+    // }
   }
 
 }

@@ -5,23 +5,25 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
 
-  [SerializeField] private LayerMask jumpableGround;
+  [SerializeField] 
+  private LayerMask jumpableGround;
+
+  [HideInInspector] 
+  public Vector2 movementInput { get; private set; }
 
   private Rigidbody2D rBody;
   private BoxCollider2D bCollider;
 
   private bool isFacingRight = true;
   private float horizontal;
-  private float speed = 5f;
+  private float speed = 4f;
   private float jumpPower = 20f;
 
-  // Start is called before the first frame update
   void Start() {
     rBody = GetComponent<Rigidbody2D>();
     bCollider = GetComponent<BoxCollider2D>();
   }
 
-  // Update is called once per frame
   void Update() {
     rBody.velocity = new Vector2(horizontal * speed, rBody.velocity.y);
 
@@ -44,8 +46,8 @@ public class PlayerController : MonoBehaviour {
   }
 
   public void Move(InputAction.CallbackContext context) {
-    float moveX = context.ReadValue<Vector2>().x;
-    Debug.Log("moveX:" + moveX);
+    movementInput = context.ReadValue<Vector2>();
+    float moveX = movementInput.x;
     if (moveX > 0) {
       horizontal = speed;
     } else if (moveX < 0) {
@@ -53,8 +55,6 @@ public class PlayerController : MonoBehaviour {
     } else {
       horizontal = 0f;
     }
-    //horizontal = Mathf.Abs(moveX) > Mathf.Epsilon ? speed : -speed;
-    //horizontal = context.ReadValue<Vector2>().x;
   }
 
   public void Jump(InputAction.CallbackContext context) {

@@ -26,9 +26,12 @@ public class StateMachine : MonoBehaviour {
   }
 
   public void ChangeState(BaseState newState) {
-    currentState.Exit();
-    currentState = newState;
-    currentState.Enter();
+    if (currentState.name != newState.name) {
+      Debug.Log("[ChangeState] : " + currentState.name + " -> " + newState.name);
+      currentState.Exit();
+      currentState = newState;
+      currentState.Enter();
+    }
   }
 
   protected virtual BaseState GetInitialState() {
