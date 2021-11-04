@@ -47,6 +47,10 @@ public class MovementSM : StateMachine {
       .With("Right", "<Keyboard>/d");
  
     moveAction.performed += ctx => {
+      //@Recall -> this MoveEntity might be overriding our states... 
+      // we should have a cleaner way to access the ctx when input is received
+      // i.e. this should only care about changing into movingState 
+      // movingState itself should update with the movingContext for example.
       this.movingState.MoveEntity(ctx);
       this.ChangeState(((MovementSM) this).movingState);
     };
