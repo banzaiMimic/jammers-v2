@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class Grounded : BaseState {
 
   // leaving movementSm here incase child classes need reference
-  protected MovementSM movementSm;
+  protected MovementSM _movementSm;
 
   public Grounded(string name, MovementSM stateMachine) : base(name, stateMachine) {
-    this.movementSm = (MovementSM) stateMachine;
+    this._movementSm = (MovementSM) stateMachine;
   }
 
   public void Awake() {
@@ -20,7 +20,7 @@ public class Grounded : BaseState {
     var action = new InputAction(binding: "<Gamepad>/buttonSouth");
     action.Enable(); 
     action.performed += ctx => {
-      stateMachine.ChangeState(movementSm.jumpingState);
+      stateMachine.ChangeState(_movementSm.jumpingState);
       //this.ChangeState(((MovementSM) this).movingState);
     };
     action.canceled += ctx => {

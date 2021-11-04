@@ -16,9 +16,9 @@ public class Idle : Grounded {
 
   public override void LateUpdate() {
     base.LateUpdate();
-    Vector2 vel = movementSm.rBody.velocity;
+    Vector2 vel = _movementSm.rBody.velocity;
     vel.x = 0;
-    movementSm.rBody.velocity = vel;
+    _movementSm.rBody.velocity = vel;
   }
 
 }
