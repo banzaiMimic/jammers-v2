@@ -20,18 +20,24 @@ public class Jumping : BaseState {
     Vector2 vel = _movementSm.rBody.velocity;
     vel.y += _movementSm.jumpForce;
     _movementSm.rBody.velocity = vel;
+    _movementSm.animator.SetBool("jumping", true);
   }
 
-  public override void UpdateLogic() {
-    base.UpdateLogic();
-    // if _grounded change state to idle
+  public override void Exit() {
+    base.Exit();
+    _movementSm.animator.SetBool("jumping", false);
+  }
+
+  public override void Update() {
+    base.Update();
+    _grounded = _movementSm.rBody.velocity.y < Mathf.Epsilon && _movementSm.rBody.IsTouchingLayers(_groundLayer);
     if (_grounded) {
       stateMachine.ChangeState(_movementSm.idleState);
     }
   }
 
-  public override void UpdatePhysics() {
-    _grounded = _movementSm.rBody.velocity.y < Mathf.Epsilon && _movementSm.rBody.IsTouchingLayers(_groundLayer);
+  public override void LateUpdate() {
+    base.LateUpdate();
   }
 
 }

@@ -15,6 +15,8 @@ public class MovementSM : StateMachine {
   public Vector2 movementInput { get; private set; }
   [HideInInspector]
   public float horizontalVelocity = 0f;
+  [HideInInspector]
+  public Animator animator;
   //@Todo prob want to convert an Entity class or IMoveable instead of a Player
   [HideInInspector]
   public Player player;
@@ -31,6 +33,7 @@ public class MovementSM : StateMachine {
     this.jumpingState = new Jumping(this);
     this.rBody = GetComponent<Rigidbody2D>();
     this.player = GetComponent<Player>();
+    this.animator = GetComponent<Animator>();
   }
 
   //@Todo might want to init this only for our Player ? 
@@ -47,6 +50,10 @@ public class MovementSM : StateMachine {
       .With("Right", "<Keyboard>/d");
  
     moveAction.performed += ctx => {
+      //@Recall -> this MoveEntity might be overriding our states... 
+      // we should have a cleaner way to access the ctx when input is received
+      // i.e. this should only care about changing into movingState 
+      // movingState itself should update with the movingContext for example.
       this.movingState.MoveEntity(ctx);
       this.ChangeState(((MovementSM) this).movingState);
     };
