@@ -18,6 +18,7 @@ public class E1_IdleState : IdleState {
 
   public override void Enter() {
     base.Enter();
+    Debug.Log("[Enemy1] -> enter E1_IdleState");
   }
 
   public override void Exit() {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,10 +22,10 @@ public class Entity : MonoBehaviour {
   public virtual void Start() {
     facingDirection = 1;
     
-    rb = GetComponent<Rigidbody2D>();
-    animator = GetComponent<Animator>();
+    aliveGO = transform.Find("Alive").gameObject;
+    rb = aliveGO.GetComponent<Rigidbody2D>();
+    animator = aliveGO.GetComponent<Animator>();
     stateMachine = new FiniteStateMachine();
-    aliveGO = GetComponent<GameObject>();
   }
 
   public virtual void Update() {
@@ -54,8 +55,8 @@ public class Entity : MonoBehaviour {
   }
 
   public virtual void OnDrawGizmos() {
-    Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));
-    Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
+    Debug.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance), Color.blue);
+    Debug.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance), Color.blue);
   }
 
 }

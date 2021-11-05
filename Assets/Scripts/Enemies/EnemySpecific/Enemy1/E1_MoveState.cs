@@ -18,6 +18,7 @@ public class E1_MoveState : MoveState {
 
   public override void Enter() {
     base.Enter();
+    Debug.Log("[Enemy1] -> enter E1_MoveState");
   }
 
   public override void Exit() {
@@ -28,6 +29,8 @@ public class E1_MoveState : MoveState {
     base.LogicUpdate();
 
     if (isDetectingWall || !isDetectingLedge) {
+      Debug.Log("[Enemy1] isDetectingWall: " + isDetectingWall);
+      Debug.Log("[Enemy1] isDetectingLedge: " + isDetectingLedge);
       enemy.idleState.SetFlipAfterIdle(true);
       stateMachine.ChangeState(enemy.idleState);
     }
