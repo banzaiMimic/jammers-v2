@@ -2,14 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SO_ChargeState : MonoBehaviour {
-  // Start is called before the first frame update
-  void Start() {
-
-  }
-
-  // Update is called once per frame
-  void Update() {
-
-  }
+public class SO_ChargeState : ScriptableObject {
+  public float chargeSpeed = 6f;
+  public float chargeTime = 2f;
 }

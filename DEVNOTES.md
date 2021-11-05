@@ -13,12 +13,22 @@ we're using updated Input System, however Input Actions are not added via ui
 - make sure Player has `ItemCollector` component on it
 
 
-## States
+# States
 
-### Enemy
-- create new state class `states/NewState` (extends State)
-- create state data class (scriptable obj) `SO_NewState`
+## Enemy
+- create new state class `states/NewState`
+- create state data class (scriptable obj) `data/SO_NewState`
 - create enemy specific state `EnemyName_NewState`
+
+### states/NewState
+- extend `State`
+- `protected SO_NewState stateData;`
+- append to constructor -> `this.stateData = stateData;`
+
+### data/SO_NewState
+- extend `ScriptableObject`
+- set public config params
+
 - declare state on enemy class
 - setup animator
   - create enemyx_someAnimation animator
