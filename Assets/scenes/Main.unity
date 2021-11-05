@@ -7967,6 +7967,9 @@ MonoBehaviour:
   moveStateData: {fileID: 11400000, guid: 41f4d6fc9e32a544ab1b31911814845f, type: 2}
   playerDetectedStateData: {fileID: 11400000, guid: ec6324afe0df4934e9b18b64656cf9d4,
     type: 2}
+  chargeStateData: {fileID: 11400000, guid: 685b4dfb7fb778640b38f6280586f0ba, type: 2}
+  lookForPlayerStateData: {fileID: 11400000, guid: 42850f97c4d7ab64d9cd476712f24e32,
+    type: 2}
 --- !u!4 &603626827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7867256467932710931, guid: 19a922dbca76c5147b5bad283d8f8b81,

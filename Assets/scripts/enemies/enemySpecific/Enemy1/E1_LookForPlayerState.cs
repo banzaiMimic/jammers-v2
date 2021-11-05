@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E1_ChargeState : ChargeState {
+public class E1_LookForPlayerState : LookForPlayerState {
 
   private Enemy1 enemy;
 
-  public E1_ChargeState(
+  public E1_LookForPlayerState(
     Entity entity, 
     FiniteStateMachine stateMachine, 
     string animBoolName, 
-    SO_ChargeState stateData,
+    SO_LookForPlayerState stateData,
     Enemy1 enemy
   ) : base(entity, stateMachine, animBoolName, stateData) {
     this.enemy = enemy;
@@ -30,12 +30,10 @@ public class E1_ChargeState : ChargeState {
 
   public override void LogicUpdate() {
     base.LogicUpdate();
-    if (!isDetectingLedge || isDetectingWall) {
-      stateMachine.ChangeState(enemy.lookForPlayerState);
-    } else if (isChargeTimeOver) {
-      if (isPlayerInMinAggroRange) {
-        stateMachine.ChangeState(enemy.playerDetectedState);
-      }
+    if (isPlayerInMinAggroRange) {
+      stateMachine.ChangeState(enemy.playerDetectedState);
+    } else if (isAllTurnsTimeDone) {
+      stateMachine.ChangeState(enemy.moveState);
     }
   }
 

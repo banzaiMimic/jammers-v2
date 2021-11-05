@@ -7,6 +7,7 @@ public class PlayerDetectedState : State {
   protected SO_PlayerDetectedState stateData;
   protected bool isPlayerInMinAggroRange;
   protected bool isPlayerInMaxAggroRange;
+  protected bool performLongRangeAction;
 
   public PlayerDetectedState(
     Entity entity, 
@@ -19,6 +20,7 @@ public class PlayerDetectedState : State {
 
   public override void Enter() {
     base.Enter();
+    performLongRangeAction = false;
     entity.SetVelocity(0f);
   }
 
@@ -28,6 +30,10 @@ public class PlayerDetectedState : State {
 
   public override void LogicUpdate() {
     base.LogicUpdate();
+
+    if (Time.time >= startTime + stateData.longRangeActionTime) {
+      performLongRangeAction = true;
+    }
   }
 
   public override void PhysicsUpdate() {

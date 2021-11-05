@@ -8,6 +8,7 @@ public class ChargeState : State {
   protected bool isPlayerInMinAggroRange;
   protected bool isDetectingLedge;
   protected bool isDetectingWall;
+  protected bool isChargeTimeOver;
 
   public ChargeState(
     Entity entity, 
@@ -20,6 +21,7 @@ public class ChargeState : State {
 
   public override void Enter() {
     base.Enter();
+    isChargeTimeOver = false;
     entity.SetVelocity(stateData.chargeSpeed);
   }
 
@@ -29,6 +31,9 @@ public class ChargeState : State {
 
   public override void LogicUpdate() {
     base.LogicUpdate();
+    if (Time.time >= startTime + stateData.chargeTime) {
+      isChargeTimeOver = true;
+    }
   }
 
   public override void PhysicsUpdate() {
