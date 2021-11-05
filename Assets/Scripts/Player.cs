@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 
   private Rigidbody2D rBody;
   private BoxCollider2D bCollider;
+  //private ItemCollector itemCollector;
 
   void Awake() {
     this.rBody = GetComponent<Rigidbody2D>();
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour {
 
   private void AddComponents() {
     this.movementSm = gameObject.AddComponent(typeof(MovementSM)) as MovementSM;
+    //this.itemCollector = gameObject.AddComponent(typeof(ItemCollector)) as ItemCollector;
   }
 
   void Update() {
