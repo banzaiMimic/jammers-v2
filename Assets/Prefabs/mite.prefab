@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7867256467932710931}
   - component: {fileID: 7867256467932710930}
   - component: {fileID: 7867256467932710929}
+  - component: {fileID: 8516988475419989311}
   m_Layer: 7
   m_Name: mite
   m_TagString: collectible
@@ -109,3 +110,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9248085, y: 0.85191345}
   m_EdgeRadius: 0
+--- !u!114 &8516988475419989311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7867256467932710928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849b8f6ace77f4e46b354148c471b496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

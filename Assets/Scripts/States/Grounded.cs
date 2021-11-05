@@ -21,7 +21,6 @@ public class Grounded : BaseState {
     action.Enable(); 
     action.performed += ctx => {
       stateMachine.ChangeState(_movementSm.jumpingState);
-      //this.ChangeState(((MovementSM) this).movingState);
     };
     action.canceled += ctx => {
       //this.ChangeState(((MovementSM) this).idleState);
