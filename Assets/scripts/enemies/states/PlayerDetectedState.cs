@@ -2,29 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : State {
+public class PlayerDetectedState : State {
 
-  protected SO_MoveState stateData;
-  protected bool isDetectingWall;
-  protected bool isDetectingLedge;
+  protected SO_PlayerDetectedState stateData;
   protected bool isPlayerInMinAggroRange;
+  protected bool isPlayerInMaxAggroRange;
 
-  public MoveState(
+  public PlayerDetectedState(
     Entity entity, 
     FiniteStateMachine stateMachine, 
     string animBoolName,
-    SO_MoveState stateData
-    ) : base(entity, stateMachine, animBoolName) {
-      this.stateData = stateData;
+    SO_PlayerDetectedState stateData
+  ): base(entity, stateMachine, animBoolName) {
+    this.stateData = stateData;
   }
 
   public override void Enter() {
     base.Enter();
-    entity.SetVelocity(stateData.movementSpeed);
-
-    isDetectingLedge = entity.CheckLedge();
-    isDetectingWall = entity.CheckWall();
+    entity.SetVelocity(0f);
     isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+    isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
   }
 
   public override void Exit() {
@@ -37,9 +34,8 @@ public class MoveState : State {
 
   public override void PhysicsUpdate() {
     base.PhysicsUpdate();
-
-    isDetectingLedge = entity.CheckLedge();
-    isDetectingWall = entity.CheckWall();
     isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+    isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
   }
+
 }

@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E1_IdleState : IdleState {
+public class E1_PlayerDetectedState : PlayerDetectedState {
 
   private Enemy1 enemy;
 
-  public E1_IdleState(
+  public E1_PlayerDetectedState(
     Entity entity, 
     FiniteStateMachine stateMachine, 
     string animBoolName, 
-    SO_IdleState stateData,
+    SO_PlayerDetectedState stateData,
     Enemy1 enemy
-    ) : base(entity, stateMachine, animBoolName, stateData) {
-      this.enemy = enemy;
+  ) : base(entity, stateMachine, animBoolName, stateData) {
+    this.enemy = enemy;
   }
 
   public override void Enter() {
     base.Enter();
-    Debug.Log("[Enemy1] -> enter E1_IdleState");
   }
 
   public override void Exit() {
@@ -28,10 +27,9 @@ public class E1_IdleState : IdleState {
   public override void LogicUpdate() {
     base.LogicUpdate();
 
-    if (isPlayerInMinAggroRange) {
-      stateMachine.ChangeState(enemy.playerDetectedState);
-    } else if (isIdleTimeOver) {
-      stateMachine.ChangeState(enemy.moveState);
+    if (!isPlayerInMaxAggroRange) {
+      enemy.idleState.SetFlipAfterIdle(false);
+      stateMachine.ChangeState(enemy.idleState);
     }
   }
 

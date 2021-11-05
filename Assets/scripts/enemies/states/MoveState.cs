@@ -7,6 +7,7 @@ public class MoveState : State {
   protected SO_MoveState stateData;
   protected bool isDetectingWall;
   protected bool isDetectingLedge;
+  protected bool isPlayerInMinAggroRange;
 
   public MoveState(
     Entity entity, 
@@ -23,6 +24,7 @@ public class MoveState : State {
 
     isDetectingLedge = entity.CheckLedge();
     isDetectingWall = entity.CheckWall();
+    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
   }
 
   public override void Exit() {
@@ -38,5 +40,6 @@ public class MoveState : State {
 
     isDetectingLedge = entity.CheckLedge();
     isDetectingWall = entity.CheckWall();
+    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
   }
 }

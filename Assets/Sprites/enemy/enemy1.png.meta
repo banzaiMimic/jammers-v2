@@ -32,6 +32,9 @@ TextureImporter:
   - first:
       213: -7108678727758263857
     second: enemy1_9
+  - first:
+      213: -3727264740498092331
+    second: enemy1_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -338,6 +341,27 @@ TextureImporter:
       bones: []
       spriteID: fc9c7994c56e85d90800000000000000
       internalID: -7108678727758263857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy1_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dec5c66778164cc0800000000000000
+      internalID: -3727264740498092331
       vertices: []
       indices: 
       edges: []

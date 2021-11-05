@@ -7773,7 +7773,7 @@ GameObject:
   - component: {fileID: 328712712}
   - component: {fileID: 328712711}
   - component: {fileID: 328712710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Alive
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -7793,6 +7793,7 @@ Transform:
   m_Children:
   - {fileID: 2116782026}
   - {fileID: 1546436802}
+  - {fileID: 1203775062}
   m_Father: {fileID: 547168385}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7961,8 +7962,11 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: 2243c1e901dab0a4b8ec16278af6d2c9, type: 2}
   wallCheck: {fileID: 2116782026}
   ledgeCheck: {fileID: 1546436802}
+  playerCheck: {fileID: 1203775062}
   idleStateData: {fileID: 11400000, guid: 2b9fa778a748fbc4f8fbc574a0193c25, type: 2}
   moveStateData: {fileID: 11400000, guid: 41f4d6fc9e32a544ab1b31911814845f, type: 2}
+  playerDetectedStateData: {fileID: 11400000, guid: ec6324afe0df4934e9b18b64656cf9d4,
+    type: 2}
 --- !u!4 &603626827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7867256467932710931, guid: 19a922dbca76c5147b5bad283d8f8b81,
@@ -8056,6 +8060,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1203775061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203775062}
+  m_Layer: 0
+  m_Name: PlayerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203775062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203775061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -0.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 328712709}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448378995
 GameObject:
   m_ObjectHideFlags: 0
@@ -8212,7 +8246,7 @@ GameObject:
   - component: {fileID: 1813809954}
   - component: {fileID: 1813809955}
   - component: {fileID: 1813809956}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

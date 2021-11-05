@@ -11,3 +11,16 @@ we're using updated Input System, however Input Actions are not added via ui
 - tag as `collectible`
 - layer as `Collectible`
 - make sure Player has `ItemCollector` component on it
+
+
+## States
+
+### Enemy
+- create new state class `states/NewState` (extends State)
+- create state data class (scriptable obj) `SO_NewState`
+- create enemy specific state `EnemyName_NewState`
+- declare state on enemy class
+- setup animator
+  - create enemyx_someAnimation animator
+  - add it to the Alive component on enemy
+  - drag png(s) into it via Animator window (open Animator window -> Select 'Alive' component -> select animation from dropdown)
