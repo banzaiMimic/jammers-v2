@@ -20,8 +20,6 @@ public class PlayerDetectedState : State {
   public override void Enter() {
     base.Enter();
     entity.SetVelocity(0f);
-    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
-    isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
   }
 
   public override void Exit() {
@@ -34,6 +32,10 @@ public class PlayerDetectedState : State {
 
   public override void PhysicsUpdate() {
     base.PhysicsUpdate();
+  }
+
+  public override void DoChecks() {
+    base.DoChecks();
     isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
     isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
   }

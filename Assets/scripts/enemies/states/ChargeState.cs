@@ -20,9 +20,6 @@ public class ChargeState : State {
 
   public override void Enter() {
     base.Enter();
-    isDetectingLedge = entity.CheckLedge();
-    isDetectingWall = entity.CheckWall();
-    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
     entity.SetVelocity(stateData.chargeSpeed);
   }
 
@@ -36,6 +33,10 @@ public class ChargeState : State {
 
   public override void PhysicsUpdate() {
     base.PhysicsUpdate();
+  }
+
+  public override void DoChecks() {
+    base.DoChecks();
     isDetectingLedge = entity.CheckLedge();
     isDetectingWall = entity.CheckWall();
     isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
