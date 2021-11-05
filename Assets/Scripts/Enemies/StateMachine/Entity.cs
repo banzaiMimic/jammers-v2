@@ -19,6 +19,8 @@ public class Entity : MonoBehaviour {
   private Vector2 velocityWorkspace;
 
   public virtual void Start() {
+    facingDirection = 1;
+    
     rb = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
     stateMachine = new FiniteStateMachine();
@@ -49,6 +51,11 @@ public class Entity : MonoBehaviour {
   public virtual void Flip() {
     facingDirection *= -1;
     aliveGO.transform.Rotate(0f, 180f, 0f);
+  }
+
+  public virtual void OnDrawGizmos() {
+    Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));
+    Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
   }
 
 }
