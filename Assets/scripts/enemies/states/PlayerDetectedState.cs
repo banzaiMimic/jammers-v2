@@ -8,6 +8,7 @@ public class PlayerDetectedState : State {
   protected bool isPlayerInMinAggroRange;
   protected bool isPlayerInMaxAggroRange;
   protected bool performLongRangeAction;
+  protected bool performCloseRangeAction;
 
   public PlayerDetectedState(
     Entity entity, 
@@ -16,6 +17,13 @@ public class PlayerDetectedState : State {
     SO_PlayerDetectedState stateData
   ): base(entity, stateMachine, animBoolName) {
     this.stateData = stateData;
+  }
+
+  public override void DoChecks() {
+    base.DoChecks();
+    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+    isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
+    performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
   }
 
   public override void Enter() {
@@ -38,12 +46,6 @@ public class PlayerDetectedState : State {
 
   public override void PhysicsUpdate() {
     base.PhysicsUpdate();
-  }
-
-  public override void DoChecks() {
-    base.DoChecks();
-    isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
-    isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
   }
 
 }

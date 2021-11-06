@@ -9,6 +9,7 @@ public class SO_Entity : ScriptableObject {
   public float ledgeCheckDistance = 0.4f;
   public float minAggroDistance = 3f;
   public float maxAggroDistance = 4f;
+  public float closeRangeActionDistance = 1f;
   public LayerMask whatIsGround;
   public LayerMask whatIsPlayer;
 

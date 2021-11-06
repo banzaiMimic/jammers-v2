@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E1_ChargeState : ChargeState {
+public class E1_MeleeAttackState : MeleeAttackState {
 
   private Enemy1 enemy;
 
-  public E1_ChargeState(
+  public E1_MeleeAttackState(
     Entity entity, 
     FiniteStateMachine stateMachine, 
     string animBoolName, 
-    SO_ChargeState stateData,
+    Transform attackPosition, 
+    SO_MeleeAttackState stateData,
     Enemy1 enemy
-  ) : base(entity, stateMachine, animBoolName, stateData) {
+  ) : base(entity, stateMachine, animBoolName, attackPosition, stateData) {
     this.enemy = enemy;
   }
 
@@ -28,16 +29,17 @@ public class E1_ChargeState : ChargeState {
     base.Exit();
   }
 
+  public override void FinishAttack() {
+    base.FinishAttack();
+  }
+
   public override void LogicUpdate() {
     base.LogicUpdate();
-    if (!isDetectingLedge || isDetectingWall) {
-      stateMachine.ChangeState(enemy.lookForPlayerState);
-    } else if (isChargeTimeOver) {
-
-      if (performCloseRangeAction) {
-        stateMachine.ChangeState(enemy.meleeAttackState);
-      } else if (isPlayerInMinAggroRange) {
+    if (isAnimationFinished) {
+      if (isPlayerInMinAggroRange) {
         stateMachine.ChangeState(enemy.playerDetectedState);
+      } else {
+        stateMachine.ChangeState(enemy.lookForPlayerState);
       }
     }
   }
@@ -46,4 +48,7 @@ public class E1_ChargeState : ChargeState {
     base.PhysicsUpdate();
   }
 
+  public override void TriggerAttack() {
+    base.TriggerAttack();
+  }
 }

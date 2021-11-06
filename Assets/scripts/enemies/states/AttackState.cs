@@ -2,36 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargeState : State {
+public class AttackState : State {
 
-  protected SO_ChargeState stateData;
+  protected Transform attackPosition;
+  protected bool isAnimationFinished;
   protected bool isPlayerInMinAggroRange;
-  protected bool isDetectingLedge;
-  protected bool isDetectingWall;
-  protected bool isChargeTimeOver;
-  protected bool performCloseRangeAction;
 
-  public ChargeState(
+  public AttackState(
     Entity entity, 
     FiniteStateMachine stateMachine, 
     string animBoolName,
-    SO_ChargeState stateData
+    Transform attackPosition
   ) : base(entity, stateMachine, animBoolName) {
-    this.stateData = stateData;
+    this.attackPosition = attackPosition;
   }
 
   public override void DoChecks() {
     base.DoChecks();
-    isDetectingLedge = entity.CheckLedge();
-    isDetectingWall = entity.CheckWall();
     isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
-    performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
   }
 
   public override void Enter() {
     base.Enter();
-    isChargeTimeOver = false;
-    entity.SetVelocity(stateData.chargeSpeed);
+    entity.atsm.attackState = this;
+    isAnimationFinished = false;
+    entity.SetVelocity(0f);
   }
 
   public override void Exit() {
@@ -40,13 +35,18 @@ public class ChargeState : State {
 
   public override void LogicUpdate() {
     base.LogicUpdate();
-    if (Time.time >= startTime + stateData.chargeTime) {
-      isChargeTimeOver = true;
-    }
   }
 
   public override void PhysicsUpdate() {
     base.PhysicsUpdate();
+  }
+
+  public virtual void TriggerAttack() {
+
+  }
+
+  public virtual void FinishAttack() {
+    isAnimationFinished = true;
   }
 
 }
