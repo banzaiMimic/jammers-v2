@@ -26,7 +26,7 @@ public abstract class Base : MonoBehaviour
 
     protected abstract void InitializeAttributes();
 
-    public void TakeDamage(float damageAmount, out bool isDead)
+    public virtual void TakeDamage(float damageAmount, out bool isDead)
     {
         if (hp == 0) { isDead = true; return; }
 

@@ -10,9 +10,4 @@ public class Enemy : Base
         hp = 3f;
         basicAttack = 1f;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
 }
