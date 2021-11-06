@@ -7773,6 +7773,7 @@ GameObject:
   - component: {fileID: 328712712}
   - component: {fileID: 328712711}
   - component: {fileID: 328712710}
+  - component: {fileID: 328712714}
   m_Layer: 8
   m_Name: Alive
   m_TagString: Enemy
@@ -7794,6 +7795,7 @@ Transform:
   - {fileID: 2116782026}
   - {fileID: 1546436802}
   - {fileID: 1203775062}
+  - {fileID: 1036662039}
   m_Father: {fileID: 547168385}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7915,6 +7917,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &328712714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328712708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d497fc089547c4fb1f84793f7ea03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &547168384
 GameObject:
   m_ObjectHideFlags: 0
@@ -7970,6 +7984,9 @@ MonoBehaviour:
   chargeStateData: {fileID: 11400000, guid: 685b4dfb7fb778640b38f6280586f0ba, type: 2}
   lookForPlayerStateData: {fileID: 11400000, guid: 42850f97c4d7ab64d9cd476712f24e32,
     type: 2}
+  meleeAttackStateData: {fileID: 11400000, guid: 56be94034c4faea4cb8ffcf35ca89acb,
+    type: 2}
+  meleeAttackPosition: {fileID: 1036662039}
 --- !u!4 &603626827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7867256467932710931, guid: 19a922dbca76c5147b5bad283d8f8b81,
@@ -8063,6 +8080,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1036662038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036662039}
+  m_Layer: 8
+  m_Name: meleeAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1036662039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036662038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.489, y: -0.123, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 328712709}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203775061
 GameObject:
   m_ObjectHideFlags: 0
