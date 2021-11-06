@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,9 +73,13 @@ public class Entity : MonoBehaviour {
   public virtual void OnDrawGizmos() {
     Debug.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance), Color.blue);
     Debug.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance), Color.blue);
-    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.closeRangeActionDistance), 0.2f);
-    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.minAggroDistance), 0.2f);
-    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.maxAggroDistance), 0.2f);
+    try {
+      // Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.closeRangeActionDistance), 0.2f);
+      // Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.minAggroDistance), 0.2f);
+      // Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(aliveGO.transform.right * entityData.maxAggroDistance), 0.2f);
+    } catch(Exception e) {
+      Debug.Log("Exception on gizmos:" + e.Message);
+    }
   }
 
 }
