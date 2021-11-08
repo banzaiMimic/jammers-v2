@@ -47,7 +47,7 @@ public class PlayerMov : MonoBehaviour
 
         if (rb.velocity.y < -0.5f)
         {
-            velocity_Y_RememberTimer = 0.5f;
+            velocity_Y_RememberTimer = 0.1f;
         }
         else
         {
