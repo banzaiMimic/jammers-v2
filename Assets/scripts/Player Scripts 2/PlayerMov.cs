@@ -29,6 +29,8 @@ public class PlayerMov : MonoBehaviour
     public float jumpGravity;      //Gravity when player has only pressed the jump button
     public float freeFallGravity;   // Gravity when player is free falling
 
+    bool jumpOneTime = true; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,7 +46,11 @@ public class PlayerMov : MonoBehaviour
         Jump();
         ModifyGravity();
         Animations();
+        SpawnLandParticleEffects();
+    }
 
+    private void SpawnLandParticleEffects()
+    {
         if (rb.velocity.y < -0.5f)
         {
             velocity_Y_RememberTimer = 0.1f;
@@ -112,18 +118,25 @@ public class PlayerMov : MonoBehaviour
         {
             isGroundedRememberTimer = 0.2f;
         }
-        else isGroundedRememberTimer -= Time.deltaTime;
+        else
+        { 
+            isGroundedRememberTimer -= Time.deltaTime; 
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             hasPressedJumpRememberTimer = 0.2f;
         }
-        else hasPressedJumpRememberTimer -= Time.deltaTime;
+        else
+        {
+            hasPressedJumpRememberTimer -= Time.deltaTime;
+        }
 
-
-        if (isGrounded && isGroundedRememberTimer > 0 && hasPressedJumpRememberTimer > 0)
+        if (isGroundedRememberTimer > 0 && hasPressedJumpRememberTimer > 0 && jumpOneTime)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            StartCoroutine(EnableJumpOneTime());
+            jumpOneTime = false;
         }
     }
 
@@ -155,5 +168,11 @@ public class PlayerMov : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         canInstantiateLandParticleEffect = true;
+    }
+
+    IEnumerator EnableJumpOneTime()
+    {
+        yield return new WaitForSeconds(0.5f);
+        jumpOneTime = true;
     }
 }
