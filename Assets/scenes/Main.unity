@@ -7542,6 +7542,11 @@ MonoBehaviour:
   jumpForce: 20
   acceleration: 8
   deacceleration: 8
+  dashTime: 0.1
+  dashSpeed: 30
+  dashDeccelarationTime: 0.05
+  isDashing: 0
+  canDash: 0
   holdJumpGravity: 4
   jumpGravity: 7
   freeFallGravity: 9
