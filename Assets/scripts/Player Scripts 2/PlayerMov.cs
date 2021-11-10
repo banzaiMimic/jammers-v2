@@ -26,8 +26,8 @@ public class PlayerMov : MonoBehaviour
     float currentDashSpeed;
     float dashTimer;
     float dashLerpTimer;
-    public bool isDashing;
-    public bool canDash;
+    bool isDashing;
+    bool canDash;
 
     float hor;
 
