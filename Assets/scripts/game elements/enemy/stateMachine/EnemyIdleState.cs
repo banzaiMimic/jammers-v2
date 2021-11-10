@@ -18,8 +18,7 @@ public class EnemyIdleState : EnemyState
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Entity
-        enemy.Start();
+        enemy = animator.gameObject.GetComponent<Entity_>();
 
         //State Enter
         startTime = Time.time;

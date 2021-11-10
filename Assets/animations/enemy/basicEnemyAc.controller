@@ -677,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6ca569c896b749a77c19a344b91c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateData: {fileID: 0}
+  stateData: {fileID: 11400000, guid: 2b9fa778a748fbc4f8fbc574a0193c25, type: 2}
 --- !u!1107 &6835318151205539807
 AnimatorStateMachine:
   serializedVersion: 6

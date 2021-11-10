@@ -26,7 +26,7 @@ public class Entity_ : MonoBehaviour {
 
   public virtual void Start() {
     facingDirection = 1;
-    aliveGO = transform.Find("Alive").gameObject;
+    aliveGO = gameObject;
     rb = aliveGO.GetComponent<Rigidbody2D>();
     animator = aliveGO.GetComponent<Animator>();
     atsm = aliveGO.GetComponent<AnimationToStateMachine>();
@@ -39,7 +39,7 @@ public class Entity_ : MonoBehaviour {
 
   public virtual void FixedUpdate() {
         currentState = animator.GetBehaviour<EnemyState>();
-        Debug.Log("currentState");
+        currentState.OnFixedUpdate();
   }
 
   public virtual void SetVelocity(float velocity) {
