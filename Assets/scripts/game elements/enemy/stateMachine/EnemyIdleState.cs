@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
-    private Entity_ enemy;
+    private Entity_ entity;
 
     //state-specific
     [SerializeField] private SO_IdleState stateData;
@@ -18,15 +18,15 @@ public class EnemyIdleState : EnemyState
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy = animator.gameObject.GetComponent<Entity_>();
+        entity = animator.gameObject.GetComponent<Entity_>();
 
         //State Enter
         startTime = Time.time;
-        enemy.animator.SetBool("idle", true);
+        entity.animator.SetBool("idle", true);
         DoChecks();
 
         //Idle State Enter
-        enemy.SetVelocity(0f);
+        entity.SetVelocity(0f);
         isIdleTimeOver = false;
         SetRandomIdleTime();
     }
@@ -46,17 +46,17 @@ public class EnemyIdleState : EnemyState
             //Idle State Exit
             if (flipAfterIdle)
             {
-                enemy.Flip();
+                entity.Flip();
             }
 
             //State Exit
-            enemy.animator.SetBool("idle", false);
-            enemy.animator.SetBool("playerDetected", true);
+            entity.animator.SetBool("idle", false);
+            entity.animator.SetBool("playerDetected", true);
         }
         else if (isIdleTimeOver)
         {
-            enemy.animator.SetBool("idle", false);
-            enemy.animator.SetBool("move", true);
+            entity.animator.SetBool("idle", false);
+            entity.animator.SetBool("move", true);
         }
     }
 
@@ -65,26 +65,9 @@ public class EnemyIdleState : EnemyState
         DoChecks();
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
-
     public void DoChecks()
     {
-        isPlayerInMinAggroRange = enemy.CheckPlayerInMinAggroRange();
+        isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
     }
 
     private void SetRandomIdleTime()
