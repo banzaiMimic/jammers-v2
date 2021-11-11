@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyIdleState : EnemyState
 {
-    private Entity_ entity;
-
     //state-specific
     [SerializeField] private SO_IdleState stateData;
     private bool flipAfterIdle;
@@ -18,7 +18,8 @@ public class EnemyIdleState : EnemyState
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        entity = animator.gameObject.GetComponent<Entity_>();
+        //Update state in entity
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
         //State Enter
         startTime = Time.time;

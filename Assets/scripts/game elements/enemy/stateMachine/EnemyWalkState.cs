@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class EnemyWalkState : EnemyState
 {
-    
-    private Entity_ entity;
-
     [SerializeField] private SO_MoveState stateData;
     private bool isDetectingWall;
     private bool isDetectingLedge;
@@ -16,8 +13,9 @@ public class EnemyWalkState : EnemyState
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
-        entity = animator.gameObject.GetComponent<Entity_>();
+        
+        //Update state in entity
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
         //State Enter
         startTime = Time.time;
@@ -26,14 +24,12 @@ public class EnemyWalkState : EnemyState
 
         //Move State Enter
         entity.SetVelocity(stateData.movementSpeed);
-
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //E1_MoveState Logic Update
-
         if (isPlayerInMinAggroRange)
         {
             //State Exit
@@ -42,8 +38,8 @@ public class EnemyWalkState : EnemyState
         }
         else if (isDetectingWall || !isDetectingLedge)
         {
-            enemy.idleState.SetFlipAfterIdle(true);
-            stateMachine.ChangeState(enemy.idleState);
+            //enemy.idleState.SetFlipAfterIdle(true);
+            //stateMachine.ChangeState(enemy.idleState);
         }
     }
 

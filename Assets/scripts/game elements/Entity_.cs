@@ -11,9 +11,8 @@ public class Entity_ : MonoBehaviour {
   public Animator animator { get; private set; }
   public GameObject aliveGO { get; private set; }
   public AnimationToStateMachine atsm { get; private set; }
-    public EnemyState currentState { get; private set; }
 
-
+    private EnemyState currentState;
 
     [SerializeField]
   private Transform wallCheck;
@@ -37,10 +36,18 @@ public class Entity_ : MonoBehaviour {
 
   }
 
-  public virtual void FixedUpdate() {
-        currentState = animator.GetBehaviour<EnemyState>();
-        currentState.OnFixedUpdate();
-  }
+    public virtual void FixedUpdate() 
+    {
+        if (currentState) 
+        { 
+            currentState.OnFixedUpdate();
+        }
+    }
+
+    public void ChangeCurrentState(EnemyState newState)
+    {
+        currentState = newState;
+    }
 
   public virtual void SetVelocity(float velocity) {
     velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
