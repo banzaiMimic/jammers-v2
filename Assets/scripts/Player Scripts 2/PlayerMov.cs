@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMov : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerMov : MonoBehaviour
     public float dashTime;
     public float dashSpeed;
     public float dashDeccelarationTime;
+    public float dashCooldownTime;
     float currentDashSpeed;
     float dashTimer;
     float dashLerpTimer;
@@ -67,7 +69,11 @@ public class PlayerMov : MonoBehaviour
         ModifyGravity();
         Animations();
         SpawnLandParticleEffects();
+        Dash();
+    }
 
+    private void Dash()
+    {
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             isDashing = true;
@@ -78,21 +84,23 @@ public class PlayerMov : MonoBehaviour
             rb.velocity = isFacingRight ? new Vector2(currentDashSpeed, 0f) : new Vector2(-currentDashSpeed, 0f);
 
             dashTimer -= Time.deltaTime;
-            if(dashTimer < 0)
+            if (dashTimer < 0)
             {
-                dashLerpTimer +=  Time.deltaTime;
+                dashLerpTimer += Time.deltaTime;
                 dashLerpTimer = Mathf.Clamp(dashLerpTimer, 0, 1);
 
                 print(dashLerpTimer);
                 currentDashSpeed = Mathf.Lerp(currentDashSpeed, movSpeed - 2, dashLerpTimer);
 
-                if(currentDashSpeed <= movSpeed)
+                if (currentDashSpeed <= movSpeed)
                 {
+                    StartCoroutine(enableCanDash());
+
                     dashTimer = dashTime;
                     dashLerpTimer = 0f;
                     isDashing = false;
                     currentDashSpeed = dashSpeed;
-                    canDash = true;
+                    canDash = false;
                     rb.velocity = Vector2.zero;
                 }
             }
@@ -239,5 +247,11 @@ public class PlayerMov : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         jumpOneTime = true;
+    }
+
+    IEnumerator enableCanDash()
+    {
+        yield return new WaitForSeconds(dashCooldownTime);
+        canDash = true;
     }
 }
