@@ -27,8 +27,6 @@ public class GiveDamage : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-
-
     private void Update()
     {
         isSlashing = !anim.GetCurrentAnimatorStateInfo(0).IsName("IdleSlash");
@@ -53,22 +51,22 @@ public class GiveDamage : MonoBehaviour
         if (canAttack && Input.GetKeyDown(KeyCode.Mouse0))
         {
             GetComponent<Animator>().SetTrigger("slash");
-            /*if (enemyInRange)
+            if (enemyInRange)
             {
-                enemy.GetComponent<EnemyDamage>().TakeDamage(hitDamage);
+                enemy.GetComponent<Enemy_TakeDamage>().TakeDamage(hitDamage);
                 GameObject effect = Instantiate(hitEffect, enemy.transform.position, Quaternion.identity);
 
                 doRecoil = true;
                 StartCoroutine(disableRecoil());
 
                 Destroy(effect, 1f);
-            }*/
+            }
             canAttack = false;
         }
 
         DisableCanAttack();
 
-        //DisableEnemyInRange();
+        DisableEnemyInRange();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -77,6 +75,7 @@ public class GiveDamage : MonoBehaviour
         {
             enemyInRange = true;
             enemy = collision.gameObject;
+            print(collision.transform.name);
         } 
     }
 

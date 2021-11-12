@@ -8,7 +8,7 @@ public class PlayerMov : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D boxCollider;
     Animator anim;
-
+    
     public GameObject landParticleEffect;
     bool canInstantiateLandParticleEffect = true;
     public GameObject feet;
@@ -36,6 +36,11 @@ public class PlayerMov : MonoBehaviour
     bool isGrounded;
     bool isFacingRight = true;
 
+    [Header("Recoil")]
+    public GameObject slash;
+    public Vector2 recoilForce;
+    bool recoil;
+
     //Timers to check if isGrounded/HasPressedJump/(rb.velocity.y < 0) was true in last 0.2 seconds
     float isGroundedRememberTimer;     
     float hasPressedJumpRememberTimer;
@@ -62,6 +67,14 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
+        recoil = slash.GetComponent<GiveDamage>().doRecoil;
+        if (recoil)
+        {
+            float recoilDirection = isFacingRight ? -1 : 1;
+            rb.AddForce(new Vector2(recoilForce.x * recoilDirection, recoilForce.y), ForceMode2D.Impulse);
+            recoil = false;
+        }
+
         hor = Input.GetAxisRaw("Horizontal");
 
         RotatePlayer();
@@ -74,7 +87,7 @@ public class PlayerMov : MonoBehaviour
 
     private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !recoil)
         {
             isDashing = true;
         }
@@ -157,7 +170,7 @@ public class PlayerMov : MonoBehaviour
 
     private void RotatePlayer()
     {
-        if (!isDashing)
+        if (!isDashing && !recoil)
         {
             if (hor > 0 && !isFacingRight)
             {
@@ -196,7 +209,7 @@ public class PlayerMov : MonoBehaviour
             hasPressedJumpRememberTimer -= Time.deltaTime;
         }
 
-        if (isGroundedRememberTimer > 0 && hasPressedJumpRememberTimer > 0 && jumpOneTime && !isDashing)
+        if (isGroundedRememberTimer > 0 && hasPressedJumpRememberTimer > 0 && jumpOneTime && !isDashing && !recoil)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(EnableJumpOneTime());
@@ -211,7 +224,7 @@ public class PlayerMov : MonoBehaviour
 
     private void PlayerMovement()
     {
-        if (!isDashing)
+        if (!isDashing && !recoil)
         {
             float targetSpeed = hor * movSpeed;  //Top Speed
             float speedDif = targetSpeed - rb.velocity.x;
