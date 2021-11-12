@@ -2,6 +2,7 @@
 
 ### team:
 - Crossedkiller (music / sfx)
-- kplee (dev.dev)
+- SuperSoul (dev)
+- kplee (dev)
 - SergeDuskHerzen (artist)
  
