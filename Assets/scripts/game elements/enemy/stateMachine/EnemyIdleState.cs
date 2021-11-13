@@ -6,25 +6,18 @@ using Random = UnityEngine.Random;
 
 public class EnemyIdleState : EnemyState
 {
-    //state-specific
     [SerializeField] private SO_IdleState stateData;
-    private bool flipAfterIdle;
     private bool isIdleTimeOver;
     private bool isPlayerInMinAggroRange;
     private float idleTime;
     
-    private float startTime;
-
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animBoolName = "idle";
+
         //Update state in entity
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
-        //State Enter
-        startTime = Time.time;
-        entity.animator.SetBool("idle", true);
-        DoChecks();
 
         //Idle State Enter
         entity.SetVelocity(0f);
@@ -45,29 +38,35 @@ public class EnemyIdleState : EnemyState
         if (isPlayerInMinAggroRange)
         {
             //Idle State Exit
-            if (flipAfterIdle)
+            if (entity.flipAfterIdle)
             {
                 entity.Flip();
             }
 
             //State Exit
-            entity.animator.SetBool("idle", false);
-            entity.animator.SetBool("playerDetected", true);
+            ChangeState(animBoolName, "playerDetected");
         }
         else if (isIdleTimeOver)
         {
-            entity.animator.SetBool("idle", false);
-            entity.animator.SetBool("move", true);
+            //Idle State Exit
+            if (entity.flipAfterIdle)
+            {
+                entity.Flip();
+            }
+
+            //State Exit
+            ChangeState(animBoolName, "move"); 
         }
     }
 
     public override void OnFixedUpdate()
     {
-        DoChecks();
+        base.OnFixedUpdate();
     }
 
-    public void DoChecks()
+    public override void DoChecks()
     {
+        base.DoChecks();
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
     }
 

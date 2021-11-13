@@ -9,18 +9,13 @@ public class EnemyWalkState : EnemyState
     private bool isDetectingLedge;
     private bool isPlayerInMinAggroRange;
 
-    private float startTime;
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        
+
+        animBoolName = "move";
+
         //Update state in entity
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
-        //State Enter
-        startTime = Time.time;
-        entity.animator.SetBool("move", true);
-        DoChecks();
 
         //Move State Enter
         entity.SetVelocity(stateData.movementSpeed);
@@ -33,28 +28,23 @@ public class EnemyWalkState : EnemyState
         if (isPlayerInMinAggroRange)
         {
             //State Exit
-            entity.animator.SetBool("move", false);
-            entity.animator.SetBool("playerDetected", true);
+            ChangeState(animBoolName, "playerDetected");
         }
         else if (isDetectingWall || !isDetectingLedge)
         {
-            //enemy.idleState.SetFlipAfterIdle(true);
-            //stateMachine.ChangeState(enemy.idleState);
+            entity.SetFlipAfterIdle(true);
+            ChangeState(animBoolName, "idle");
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
     public override void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
+        base.OnFixedUpdate();
     }
 
-    private void DoChecks()
+    public override void DoChecks()
     {
+        base.DoChecks();
         //Move State DoChecks
         isDetectingLedge = entity.CheckLedge();
         isDetectingWall = entity.CheckWall();

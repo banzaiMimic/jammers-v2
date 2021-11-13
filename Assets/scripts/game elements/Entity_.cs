@@ -14,6 +14,8 @@ public class Entity_ : MonoBehaviour {
 
     private EnemyState currentState;
 
+    public bool flipAfterIdle;
+
     [SerializeField]
   private Transform wallCheck;
   [SerializeField]
@@ -29,7 +31,7 @@ public class Entity_ : MonoBehaviour {
     rb = aliveGO.GetComponent<Rigidbody2D>();
     animator = aliveGO.GetComponent<Animator>();
     atsm = aliveGO.GetComponent<AnimationToStateMachine>();
-    
+        flipAfterIdle = false;
   }
 
   public virtual void Update() {
@@ -54,7 +56,12 @@ public class Entity_ : MonoBehaviour {
     rb.velocity = velocityWorkspace;
   }
 
-  public virtual bool CheckWall() {
+    public void SetFlipAfterIdle(bool flip)
+    {
+        flipAfterIdle = flip;
+    }
+
+    public virtual bool CheckWall() {
     return Physics2D.Raycast(wallCheck.position, aliveGO.transform.right, entityData.wallCheckDistance, entityData.whatIsGround);
   }
 
