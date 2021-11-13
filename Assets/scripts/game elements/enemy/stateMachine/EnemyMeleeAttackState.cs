@@ -21,6 +21,11 @@ public class EnemyMeleeAttackState : EnemyState
         //Update state in entity
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
+        //AttackState Enter
+        entity.atsm.attackState = this;
+        isAnimationFinished = false;
+        entity.SetVelocity(0f);
+
         //MeleeAttackState Enter
         attackDetails.damageAmount = stateData.attackDamage;
         attackDetails.position = entity.aliveGO.transform.position;
@@ -44,6 +49,22 @@ public class EnemyMeleeAttackState : EnemyState
         //AttackState DoChecks()
         base.DoChecks();
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+    }
+
+    public void FinishAttack()
+    {
+        isAnimationFinished = true;
+    }
+
+    public void TriggerAttack()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, stateData.attackRadius, stateData.whatIsPlayer);
+
+        //@Todo might want to let Dispatcher handle this
+        foreach (Collider2D collider in detectedObjects)
+        {
+            collider.transform.SendMessage("damage", attackDetails);
+        }
     }
 
 }

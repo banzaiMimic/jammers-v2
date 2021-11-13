@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b72d93961f5634c819faf2203a2e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateData: {fileID: 11400000, guid: ec6324afe0df4934e9b18b64656cf9d4, type: 2}
 --- !u!114 &-4825766071359321619
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d47c9fedc9a2e46a0a80de5e264ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateData: {fileID: 11400000, guid: 685b4dfb7fb778640b38f6280586f0ba, type: 2}
 --- !u!114 &-4652493885107998399
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b18ddd0df11dc49880cb9ca13e3161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateData: {fileID: 11400000, guid: 42850f97c4d7ab64d9cd476712f24e32, type: 2}
 --- !u!1101 &-2058886657452941438
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -216,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611ec167c63ac1a4cb37848249198d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateData: {fileID: 11400000, guid: 56be94034c4faea4cb8ffcf35ca89acb, type: 2}
 --- !u!1101 &-340678195214948760
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -678,7 +682,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateData: {fileID: 11400000, guid: 2b9fa778a748fbc4f8fbc574a0193c25, type: 2}
-  flipAfterIdle: 1
 --- !u!1107 &6835318151205539807
 AnimatorStateMachine:
   serializedVersion: 6
@@ -786,4 +789,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateData: {fileID: 11400000, guid: 41f4d6fc9e32a544ab1b31911814845f, type: 2}
-  idleState: {fileID: 6309846347073297969}
