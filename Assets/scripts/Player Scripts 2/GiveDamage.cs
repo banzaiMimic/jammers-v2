@@ -10,14 +10,18 @@ public class GiveDamage : MonoBehaviour
     Animator anim;
 
     public float hitDamage;
+
+    [Header("Recoil")]
     public bool doRecoil;
     public float recoilDuration;
 
-    public bool canAttack = true;
+    [Header("Attack")]
+    bool canAttack = true;
     public bool isSlashing;
-    float canAttackTimer;
     public float canAttackTimeIntervel;
+
     bool enemyInRange;
+    bool hitOneTime;
 
     float timer = 0.1f;
 
@@ -25,10 +29,12 @@ public class GiveDamage : MonoBehaviour
     {
         canAttackTimer = canAttackTimeIntervel;
         anim = GetComponent<Animator>();
+        hitOneTime = true;
     }
 
     private void Update()
     {
+        print(doRecoil);
         isSlashing = !anim.GetCurrentAnimatorStateInfo(0).IsName("IdleSlash");
 
         if (!isSlashing)
@@ -48,10 +54,15 @@ public class GiveDamage : MonoBehaviour
 
     private void Attack()
     {
-        if (canAttack && Input.GetKeyDown(KeyCode.Mouse0))
+        if (canAttack && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.J)))
         {
             GetComponent<Animator>().SetTrigger("slash");
-            if (enemyInRange)
+            canAttack = false;
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Slash"))
+        {
+            if (enemyInRange && hitOneTime)
             {
                 enemy.GetComponent<Enemy_TakeDamage>().TakeDamage(hitDamage);
                 GameObject effect = Instantiate(hitEffect, enemy.transform.position, Quaternion.identity);
@@ -60,10 +71,9 @@ public class GiveDamage : MonoBehaviour
                 StartCoroutine(disableRecoil());
 
                 Destroy(effect, 1f);
+                hitOneTime = false;
             }
-            canAttack = false;
         }
-
         DisableCanAttack();
 
         DisableEnemyInRange();
@@ -96,6 +106,7 @@ public class GiveDamage : MonoBehaviour
         if (canAttackTimer < 0)
         {
             canAttack = true;
+            hitOneTime = true;
             canAttackTimer = canAttackTimeIntervel;
         }
     }
@@ -115,7 +126,7 @@ public class GiveDamage : MonoBehaviour
 
     IEnumerator disableRecoil()
     {
-        yield return new WaitForSeconds(recoilDuration);
+        yield return new WaitForSeconds(Time.deltaTime);
         doRecoil = false;
     }
 }

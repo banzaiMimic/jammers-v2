@@ -16,7 +16,7 @@ public class Enemy_TakeDamage : MonoBehaviour
 
     void Update()
     {
-        if(health < 0)
+        if(health <= 0)
         {
             Die();
         }   

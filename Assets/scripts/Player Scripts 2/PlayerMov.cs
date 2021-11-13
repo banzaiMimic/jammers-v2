@@ -67,13 +67,7 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
-        recoil = slash.GetComponent<GiveDamage>().doRecoil;
-        if (recoil)
-        {
-            float recoilDirection = isFacingRight ? -1 : 1;
-            rb.AddForce(new Vector2(recoilForce.x * recoilDirection, recoilForce.y), ForceMode2D.Impulse);
-            recoil = false;
-        }
+        Recoil();
 
         hor = Input.GetAxisRaw("Horizontal");
 
@@ -83,6 +77,18 @@ public class PlayerMov : MonoBehaviour
         Animations();
         SpawnLandParticleEffects();
         Dash();
+    }
+
+    private void Recoil()
+    {
+        recoil = slash.GetComponent<GiveDamage>().doRecoil;
+        if (recoil)
+        {
+            rb.velocity = Vector2.zero;
+
+            float recoilDirection = isFacingRight ? -1 : 1;
+            rb.AddForce(new Vector2(recoilForce.x * recoilDirection, recoilForce.y), ForceMode2D.Impulse);
+        }
     }
 
     private void Dash()
@@ -102,7 +108,6 @@ public class PlayerMov : MonoBehaviour
                 dashLerpTimer += Time.deltaTime;
                 dashLerpTimer = Mathf.Clamp(dashLerpTimer, 0, 1);
 
-                print(dashLerpTimer);
                 currentDashSpeed = Mathf.Lerp(currentDashSpeed, movSpeed - 2, dashLerpTimer);
 
                 if (currentDashSpeed <= movSpeed)
