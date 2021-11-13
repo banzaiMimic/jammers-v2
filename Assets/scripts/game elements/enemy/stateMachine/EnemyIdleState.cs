@@ -1,51 +1,77 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class EnemyIdleState : StateMachineBehaviour
+public class EnemyIdleState : EnemyState
 {
-    private Entity enemy;
-    //state-specific
     [SerializeField] private SO_IdleState stateData;
-    private bool flipAfterIdle;
     private bool isIdleTimeOver;
     private bool isPlayerInMinAggroRange;
     private float idleTime;
     
-    private float startTime;
-
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //State Enter
-        startTime = Time.time;
-        animator.SetBool("idle", true);
+        animBoolName = "idle";
+
+        //Update state in entity
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
         //Idle State Enter
-
+        entity.SetVelocity(0f);
+        isIdleTimeOver = false;
+        SetRandomIdleTime();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //Idle State Logic Update
+        if (Time.time >= startTime + idleTime)
+        {
+            isIdleTimeOver = true;
+        }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+        //E1_IdleState Logic Update
+        if (isPlayerInMinAggroRange)
+        {
+            //Idle State Exit
+            if (entity.flipAfterIdle)
+            {
+                entity.Flip();
+            }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+            //State Exit
+            ChangeState(animBoolName, "playerDetected");
+        }
+        else if (isIdleTimeOver)
+        {
+            //Idle State Exit
+            if (entity.flipAfterIdle)
+            {
+                entity.Flip();
+            }
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+            //State Exit
+            ChangeState(animBoolName, "move"); 
+        }
+    }
+
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+    }
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+    }
+
+    private void SetRandomIdleTime()
+    {
+        idleTime = Random.Range(stateData.minIdleTime, stateData.maxIdleTime);
+    }
 }
