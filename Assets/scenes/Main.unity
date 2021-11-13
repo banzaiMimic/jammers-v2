@@ -7416,7 +7416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 628896456}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7452,7 +7452,7 @@ GameObject:
   - component: {fileID: 686408605}
   - component: {fileID: 686408604}
   - component: {fileID: 686408610}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
