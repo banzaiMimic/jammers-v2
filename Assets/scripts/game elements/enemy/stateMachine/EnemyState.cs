@@ -20,6 +20,8 @@ public abstract class EnemyState : StateMachineBehaviour
         DoChecks();
     }
 
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+
     protected void ChangeState(string from, string to)
     {
         entity.animator.SetBool(from, false);

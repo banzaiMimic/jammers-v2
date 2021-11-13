@@ -24,6 +24,8 @@ public class EnemyWalkState : EnemyState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
         //E1_MoveState Logic Update
         if (isPlayerInMinAggroRange)
         {
