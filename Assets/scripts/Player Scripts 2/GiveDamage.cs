@@ -19,6 +19,7 @@ public class GiveDamage : MonoBehaviour
     bool canAttack = true;
     public bool isSlashing;
     public float canAttackTimeIntervel;
+    float canAttackTimer;
 
     bool enemyInRange;
     bool hitOneTime;
