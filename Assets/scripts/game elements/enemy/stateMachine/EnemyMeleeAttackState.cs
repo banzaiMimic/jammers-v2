@@ -60,12 +60,11 @@ public class EnemyMeleeAttackState : EnemyState
     public void TriggerAttack()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, stateData.attackRadius, stateData.whatIsPlayer);
-        Debug.Log(detectedObjects);
 
         //@Todo might want to let Dispatcher handle this
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.SendMessage("damage", attackDetails);
+            collider.transform.SendMessage("TakeDamage", attackDetails);
         }
     }
 
