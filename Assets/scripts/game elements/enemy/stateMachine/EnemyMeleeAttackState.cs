@@ -22,6 +22,7 @@ public class EnemyMeleeAttackState : EnemyState
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         //AttackState Enter
+        attackPosition = animator.gameObject.GetComponentInChildren<MeleeAttackPosition>().transform;
         entity.atsm.attackState = this;
         isAnimationFinished = false;
         entity.SetVelocity(0f);
@@ -59,6 +60,7 @@ public class EnemyMeleeAttackState : EnemyState
     public void TriggerAttack()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, stateData.attackRadius, stateData.whatIsPlayer);
+        Debug.Log(detectedObjects);
 
         //@Todo might want to let Dispatcher handle this
         foreach (Collider2D collider in detectedObjects)
