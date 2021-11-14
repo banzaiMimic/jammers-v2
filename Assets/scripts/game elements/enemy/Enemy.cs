@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : Base
 {
+    //try
     protected override void InitializeAttributes()
     {
         type = ElementType.ENEMY;
