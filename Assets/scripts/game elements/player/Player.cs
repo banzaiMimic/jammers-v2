@@ -15,7 +15,6 @@ public class Player : Base
 
     private Rigidbody2D rBody;
     private BoxCollider2D bCollider;
-    //private ItemCollector itemCollector;
 
     #region Attack/Combat
     [SerializeField] private GameObject bulletPF = null;
@@ -35,7 +34,6 @@ public class Player : Base
     private void AddComponents()
     {
         this.movementSm = gameObject.AddComponent(typeof(MovementSM)) as MovementSM;
-        //this.itemCollector = gameObject.AddComponent(typeof(ItemCollector)) as ItemCollector;
     }
 
     public override void TakeDamage(float damageAmount, out bool isDead)
