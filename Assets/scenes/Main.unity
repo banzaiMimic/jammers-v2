@@ -7453,6 +7453,7 @@ GameObject:
   - component: {fileID: 686408605}
   - component: {fileID: 686408604}
   - component: {fileID: 686408610}
+  - component: {fileID: 686408611}
   m_Layer: 3
   m_Name: Player_2
   m_TagString: Untagged
@@ -7641,6 +7642,28 @@ MonoBehaviour:
     m_Bits: 64
   movementSm: {fileID: 0}
   bulletPF: {fileID: 0}
+--- !u!114 &686408611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686408603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1ca4ef9a27d1744b33a8ea9185ad8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartsInOrder:
+  - {fileID: 2046872316}
+  - {fileID: 956012062}
+  - {fileID: 1196690271}
+  - {fileID: 1259713467}
+  - {fileID: 1809790032}
+  emptyHeart: {fileID: 4518776606768957368, guid: 72b519024380e4648bf25c74f5e196ab,
+    type: 3}
+  fullHeart: {fileID: -4031094179166907523, guid: 72b519024380e4648bf25c74f5e196ab,
+    type: 3}
 --- !u!1 &956012060
 GameObject:
   m_ObjectHideFlags: 0
@@ -8079,7 +8102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -50}
+  m_AnchoredPosition: {x: 150, y: -100}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398943334
