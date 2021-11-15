@@ -7548,6 +7548,12 @@ MonoBehaviour:
   jumpForce: 20
   acceleration: 8
   deacceleration: 8
+  dashTime: 0
+  dashSpeed: 0
+  dashDeccelarationTime: 0
+  dashCooldownTime: 0
+  slash: {fileID: 0}
+  recoilForce: {x: 0, y: 0}
   holdJumpGravity: 4
   jumpGravity: 7
   freeFallGravity: 9
@@ -8152,6 +8158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1ca4ef9a27d1744b33a8ea9185ad8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heartsInOrder: []
+  emptyHeart: {fileID: 0}
+  fullHeart: {fileID: 0}
 --- !u!1 &1448378995
 GameObject:
   m_ObjectHideFlags: 0
