@@ -67,8 +67,6 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
-        Recoil();
-
         hor = Input.GetAxisRaw("Horizontal");
 
         RotatePlayer();
@@ -79,16 +77,12 @@ public class PlayerMov : MonoBehaviour
         Dash();
     }
 
-    private void Recoil()
+    public void Recoil()
     {
-        recoil = slash.GetComponent<GiveDamage>().doRecoil;
-        if (recoil)
-        {
-            rb.velocity = Vector2.zero;
+        rb.velocity = Vector2.zero;
 
-            float recoilDirection = isFacingRight ? -1 : 1;
-            rb.AddForce(new Vector2(recoilForce.x * recoilDirection, recoilForce.y), ForceMode2D.Impulse);
-        }
+        float recoilDirection = isFacingRight ? -1 : 1;
+        rb.AddForce(new Vector2(recoilForce.x * recoilDirection, recoilForce.y), ForceMode2D.Impulse);       
     }
 
     private void Dash()

@@ -7183,6 +7183,7 @@ GameObject:
   - component: {fileID: 443206090}
   - component: {fileID: 443206089}
   - component: {fileID: 443206092}
+  - component: {fileID: 443206093}
   m_Layer: 0
   m_Name: Slash
   m_TagString: Untagged
@@ -7217,12 +7218,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 753551860}
-  hitEffect: {fileID: 5468634321601984704, guid: ce028e3c2a0118a47961537d9cc9f3fa,
+  hitEffect: {fileID: 5468634321601984704, guid: 3709097a34ac1a949b2e719ee929dd25,
     type: 3}
   hitDamage: 10
-  doRecoil: 0
-  recoilDuration: 0.07
-  canAttack: 1
   isSlashing: 0
   canAttackTimeIntervel: 0.5
 --- !u!212 &443206090
@@ -7265,7 +7263,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9088870608625339714, guid: 9b77a54fc8a72b74184c83563d02ecf1,
+  m_Sprite: {fileID: 6235726649464954005, guid: 496523ae3714b9e4c90725fec5d78ab1,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -7287,7 +7285,7 @@ Animator:
   m_GameObject: {fileID: 443206087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aff54acec9f99984d90d89d8dd07f2db, type: 2}
+  m_Controller: {fileID: 9100000, guid: bb86a378b161d9c46ba88728f2139889, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7322,6 +7320,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4761202, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &443206093
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443206087}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &603626827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7867256467932710931, guid: 19a922dbca76c5147b5bad283d8f8b81,
@@ -7472,7 +7491,7 @@ MonoBehaviour:
   dashDeccelarationTime: 0.05
   dashCooldownTime: 0
   slash: {fileID: 443206087}
-  recoilForce: {x: 0.65, y: 0.4}
+  recoilForce: {x: 30, y: 7}
   holdJumpGravity: 4
   jumpGravity: 7
   freeFallGravity: 9
@@ -7601,8 +7620,8 @@ GameObject:
   - component: {fileID: 1154404350}
   - component: {fileID: 1154404349}
   - component: {fileID: 1154404348}
-  - component: {fileID: 1154404347}
   - component: {fileID: 1154404346}
+  - component: {fileID: 1154404347}
   m_Layer: 0
   m_Name: Enemy_LadyBug
   m_TagString: Enemy
@@ -7625,7 +7644,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -7640,12 +7659,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1154404345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599ab382cb4ac454aa43d82ba992d127, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a8c577d988e36042b79acd6c8f017cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathEffect: {fileID: 5468634321601984704, guid: ce028e3c2a0118a47961537d9cc9f3fa,
+  deathEffect: {fileID: 5468634321601984704, guid: 3709097a34ac1a949b2e719ee929dd25,
     type: 3}
-  maxHealth: 30
+  maxHealth: 100
 --- !u!61 &1154404348
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7682,7 +7701,7 @@ Animator:
   m_GameObject: {fileID: 1154404345}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d52bf457b04cb054792595cc1798f3fc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 524c536ad79f1034688524d9c8c470b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7730,8 +7749,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1262475055499903933, guid: 05ccb4e9d5d993c43aefd8bdc8e8407e,
+  m_SortingOrder: 7
+  m_Sprite: {fileID: -1262475055499903933, guid: beb05a9f169f6c5468060c7fb4bef2a0,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

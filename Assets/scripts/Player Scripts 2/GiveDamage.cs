@@ -8,12 +8,9 @@ public class GiveDamage : MonoBehaviour
     public GameObject hitEffect;
     GameObject enemy;
     Animator anim;
+    PlayerMov player;
 
     public float hitDamage;
-
-    [Header("Recoil")]
-    public bool doRecoil;
-    public float recoilDuration;
 
     [Header("Attack")]
     bool canAttack = true;
@@ -30,12 +27,12 @@ public class GiveDamage : MonoBehaviour
     {
         canAttackTimer = canAttackTimeIntervel;
         anim = GetComponent<Animator>();
+        player = FindObjectOfType<PlayerMov>();
         hitOneTime = true;
     }
 
     private void Update()
     {
-        print(doRecoil);
         isSlashing = !anim.GetCurrentAnimatorStateInfo(0).IsName("IdleSlash");
 
         if (!isSlashing)
@@ -68,8 +65,7 @@ public class GiveDamage : MonoBehaviour
                 enemy.GetComponent<Enemy_TakeDamage>().TakeDamage(hitDamage);
                 GameObject effect = Instantiate(hitEffect, enemy.transform.position, Quaternion.identity);
 
-                doRecoil = true;
-                StartCoroutine(disableRecoil());
+                player.Recoil();
 
                 Destroy(effect, 1f);
                 hitOneTime = false;
@@ -78,6 +74,7 @@ public class GiveDamage : MonoBehaviour
         DisableCanAttack();
 
         DisableEnemyInRange();
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -86,7 +83,6 @@ public class GiveDamage : MonoBehaviour
         {
             enemyInRange = true;
             enemy = collision.gameObject;
-            print(collision.transform.name);
         } 
     }
 
@@ -123,11 +119,5 @@ public class GiveDamage : MonoBehaviour
             enemyInRange = false;
             timer = 0.5f;
         }
-    }
-
-    IEnumerator disableRecoil()
-    {
-        yield return new WaitForSeconds(Time.deltaTime);
-        doRecoil = false;
     }
 }
