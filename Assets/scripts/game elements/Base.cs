@@ -16,23 +16,23 @@ public abstract class Base : MonoBehaviour
     #endregion
 
     #region Combat stats
-    protected float basicAttack = 0f;
+    public float basicAttack { get; protected set; } = 0f;
     #endregion
 
-    private void Awake()
+    protected void Awake()
     {
         InitializeAttributes();
     }
 
     protected abstract void InitializeAttributes();
 
-    public virtual void TakeDamage(float damageAmount, out bool isDead)
+    public virtual bool TakeDamage(float damageAmount)
     {
-        if (hp == 0) { isDead = true; return; }
+        if (hp == 0) { return true; }
 
         hp = Mathf.Max(hp - damageAmount, 0);
 
-        if (hp != 0) { isDead = false; return; }
-        isDead = true;
+        if (hp != 0) { return false; }
+        return true;
     }
 }

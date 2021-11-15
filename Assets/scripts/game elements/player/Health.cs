@@ -5,25 +5,32 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    private Player player;
     [SerializeField] private Animator[] heartsInOrder;
     [SerializeField] private Sprite emptyHeart;
     [SerializeField] private Sprite fullHeart;
 
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+
+        SubscribeEvents();
+    }
+
     private void UpdateHealthBar(int remainingLife)
     {
-        for (int i = 5; i > 0; i--)
+        Debug.Log(remainingLife);
+
+        for (int i = 4; i > remainingLife - 1; i--)
         {
-            if(i > remainingLife) 
-            {
-                heartsInOrder[i].SetTrigger("decrease");
-                heartsInOrder[i].GetComponent<Image>().sprite = emptyHeart;
-            }
+            heartsInOrder[i].SetTrigger("decrease");
+            heartsInOrder[i].GetComponent<Image>().sprite = emptyHeart;
         }
     }
 
     public void SubscribeEvents()
     {
-
+        player.OnDamageReceived += UpdateHealthBar;
     }
 
     //public void Unsubscribe

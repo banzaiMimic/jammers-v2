@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMeleeAttackState : EnemyState
 {
+    private Enemy enemy;
+
     //MeleeAttackState
     [SerializeField] private SO_MeleeAttackState stateData;
     private AttackDetails attackDetails;
@@ -16,6 +18,8 @@ public class EnemyMeleeAttackState : EnemyState
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        enemy = animator.GetComponentInParent<Enemy>();
+
         animBoolName = "meleeAttack";
 
         //Update state in entity
@@ -64,7 +68,7 @@ public class EnemyMeleeAttackState : EnemyState
         //@Todo might want to let Dispatcher handle this
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.SendMessage("TakeDamage", attackDetails);
+            collider.transform.SendMessage("TakeDamage", enemy.basicAttack);
         }
     }
 

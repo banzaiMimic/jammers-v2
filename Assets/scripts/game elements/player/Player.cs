@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Base
 {
-    private event Action OnDamageReceived;
+    public event Action<int> OnDamageReceived;
 
     [SerializeField]
     private LayerMask jumpableGround;
@@ -22,13 +22,10 @@ public class Player : Base
 
     void Awake()
     {
+        base.Awake();
         this.rBody = GetComponent<Rigidbody2D>();
         this.bCollider = GetComponent<BoxCollider2D>();
         this.AddComponents();
-    }
-
-    private void Start()
-    {
     }
 
     private void AddComponents()
@@ -36,10 +33,12 @@ public class Player : Base
         this.movementSm = gameObject.AddComponent(typeof(MovementSM)) as MovementSM;
     }
 
-    public override void TakeDamage(float damageAmount, out bool isDead)
+    public override bool TakeDamage(float damageAmount)
     {
-        base.TakeDamage(damageAmount, out isDead);
-        OnDamageReceived?.Invoke();
+        bool isDead = base.TakeDamage(damageAmount);
+        OnDamageReceived?.Invoke((int)hp);
+
+        return isDead;
     }
 
     protected override void InitializeAttributes()

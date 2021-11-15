@@ -47,7 +47,7 @@ public class Attack : MonoBehaviour
             //do damage to the collided enemy
             if (TryGetComponent<Base>(out Base element) && element as Enemy)
             {
-                element.TakeDamage(DamageAmount, out bool isDead);
+                bool isDead = element.TakeDamage(DamageAmount);
                 Debug.Log($"Is enemy dead? {isDead}");
             }
 
