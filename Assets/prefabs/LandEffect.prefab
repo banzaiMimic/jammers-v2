@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 758009982684553351}
   - component: {fileID: 758009982684553348}
   m_Layer: 0
-  m_Name: LandEffect
+  m_Name: landEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
