@@ -20,7 +20,7 @@ public class Player : Base
     [SerializeField] private GameObject bulletPF = null;
     #endregion
 
-    void Awake()
+    new void Awake()
     {
         base.Awake();
         this.rBody = GetComponent<Rigidbody2D>();
