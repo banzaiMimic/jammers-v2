@@ -84,9 +84,19 @@ public class Entity_ : MonoBehaviour
         return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.maxAggroDistance, entityData.whatIsPlayer);
     }
 
+    public virtual bool CheckPlayerInMinAggroRangeCircular()
+    {
+        return Physics2D.OverlapCircle(playerCheck.position, entityData.minAggroDistance, entityData.whatIsPlayer);
+    }
+
     public virtual bool CheckPlayerInCloseRangeAction()
     {
         return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.closeRangeActionDistance, entityData.whatIsPlayer);
+    }
+
+    public virtual bool CheckEntityIfBlocked(Vector3 entityPosition)
+    {
+        return Physics2D.Raycast(playerCheck.position, Vector3.Normalize(entityPosition - playerCheck.position), entityData.whatIsGround);
     }
 
     public virtual void Flip()
