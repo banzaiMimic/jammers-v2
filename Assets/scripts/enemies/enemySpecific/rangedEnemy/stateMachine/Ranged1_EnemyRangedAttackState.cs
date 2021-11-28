@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Ranged1_EnemyRangedAttackState : EnemyAttackState
 {
-    [SerializeField] private Player player;
-    private Enemy enemy;
+    public Enemy enemy;
 
     //MeleeAttackState
     [SerializeField] private SO_MeleeAttackState stateData;
-    private Attack dung;
+    public GameObject dung;
     private AttackDetails attackDetails;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy = animator.GetComponentInParent<Enemy>();
-        dung = enemy.GetComponentInChildren<Attack>();
-
         animBoolName = "rangedAttack";
 
         //Update state in entity
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
+        enemy = animator.GetComponentInParent<Enemy>();
+        dung = entity.attackPF;
 
         //AttackState Enter
         attackPosition = animator.gameObject.GetComponentInChildren<RangedAttackPosition>().transform;
@@ -53,30 +52,39 @@ public class Ranged1_EnemyRangedAttackState : EnemyAttackState
     {
         //AttackState DoChecks()
         base.DoChecks();
+
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRangeCircular();
-        isPlayerNotBlocked = entity.CheckEntityIfBlocked(player.transform.position);
     }
 
     public override void PrepareAttack()
     {
+        Debug.Log("prepare");
         base.PrepareAttack();
 
         //flip bug
+        entity.Flip();
 
-
-        //change bug sprite to bug without dung
-
-        //activate the dung game object, then activate rolling
-
+        //instantiate the dung game object
+        GameObject go = Instantiate(dung, attackPosition.position, Quaternion.identity);
     }
 
     public override void FinishAttack()
     {
+        Debug.Log("finish");
+
         base.FinishAttack();
+
+        //flip bug back to original position
+        entity.Flip();
+
+        //deactivate the dung game object
+        //dung.GetComponent<SpriteRenderer>().sprite = null;
     }
 
     public override void TriggerAttack()
     {
+        Debug.Log("trigger");
+
         base.TriggerAttack();
 
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, stateData.attackRadius, stateData.whatIsPlayer);

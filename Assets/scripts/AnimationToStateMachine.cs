@@ -8,6 +8,11 @@ public class AnimationToStateMachine : MonoBehaviour
 
     public EnemyAttackState attackState;
 
+    private void PrepareAttack()
+    {
+        attackState.PrepareAttack();
+    }
+
     private void TriggerAttack()
     {
         attackState.TriggerAttack();

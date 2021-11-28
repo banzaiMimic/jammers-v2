@@ -23,7 +23,7 @@ public class Entity_ : MonoBehaviour
     private Transform playerCheck;
 
     private Vector2 velocityWorkspace;
-    [SerializeField] private GameObject attackPF = null;
+    [SerializeField] public GameObject attackPF = null;
 
     public virtual void Start()
     {
@@ -89,6 +89,11 @@ public class Entity_ : MonoBehaviour
         return Physics2D.OverlapCircle(playerCheck.position, entityData.minAggroDistance, entityData.whatIsPlayer);
     }
 
+    public virtual bool CheckPlayerInMaxAggroRangeCircular()
+    {
+        return Physics2D.OverlapCircle(playerCheck.position, entityData.maxAggroDistance, entityData.whatIsPlayer);
+    }
+
     public virtual bool CheckPlayerInCloseRangeAction()
     {
         return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.closeRangeActionDistance, entityData.whatIsPlayer);
@@ -96,7 +101,8 @@ public class Entity_ : MonoBehaviour
 
     public virtual bool CheckEntityIfBlocked(Vector3 entityPosition)
     {
-        return Physics2D.Raycast(playerCheck.position, Vector3.Normalize(entityPosition - playerCheck.position), entityData.whatIsGround);
+        return Physics2D.Raycast(playerCheck.position, Vector3.Normalize(entityPosition - playerCheck.position), 
+            Vector3.Distance(entityPosition, playerCheck.position), entityData.whatIsGround);
     }
 
     public virtual void Flip()

@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class Player : Base
 {
+    private static Player instance;
+    public static Player Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<Player>();
+            }
+            return instance;
+        }
+    }
+
     public event Action<int> OnDamageReceived;
 
     [SerializeField]

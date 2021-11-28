@@ -7,7 +7,7 @@ public class EnemyAttackState : EnemyState
     protected Transform attackPosition;
     protected bool isAnimationFinished;
     protected bool isPlayerInMinAggroRange;
-    protected bool isPlayerNotBlocked;
+    
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

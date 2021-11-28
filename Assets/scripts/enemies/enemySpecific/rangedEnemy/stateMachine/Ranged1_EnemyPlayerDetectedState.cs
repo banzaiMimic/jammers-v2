@@ -7,8 +7,8 @@ public class Ranged1_EnemyPlayerDetectedState : EnemyState
     [SerializeField] private SO_PlayerDetectedState stateData;
     private bool isPlayerInMinAggroRange;
     private bool isPlayerInMaxAggroRange;
+    protected bool isPlayerNotBlocked;
     private bool performLongRangeAction;
-    private bool performCloseRangeAction;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,6 +28,8 @@ public class Ranged1_EnemyPlayerDetectedState : EnemyState
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+        Debug.Log(isPlayerInMinAggroRange);
+
         //PlayerDetected State Logic Update
         if (Time.time >= startTime + stateData.longRangeActionTime)
         {
@@ -36,7 +38,7 @@ public class Ranged1_EnemyPlayerDetectedState : EnemyState
         }
 
         //E1_PlayerDetectedState Logic Update
-        if (!isPlayerInMaxAggroRange) { ChangeState(animBoolName, "lookForPlayer"); }
+        if (!isPlayerInMaxAggroRange ) { ChangeState(animBoolName, "lookForPlayer"); }
         else if (isPlayerInMinAggroRange) { ChangeState(animBoolName, "rangedAttack"); }
     }
 
@@ -48,6 +50,7 @@ public class Ranged1_EnemyPlayerDetectedState : EnemyState
     public override void DoChecks()
     {
         base.DoChecks();
-        isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
+        isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRangeCircular();
+        isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRangeCircular();
     }
 }
